@@ -50,7 +50,7 @@
 #include <boost/thread.hpp>
 
 #if defined(NDEBUG)
-# error "Litecoin cannot be compiled without assertions."
+# error "Sendycoin cannot be compiled without assertions."
 #endif
 
 /**
@@ -92,7 +92,7 @@ static void CheckBlockIndex(const Consensus::Params& consensusParams);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const std::string strMessageMagic = "Litecoin Signed Message:\n";
+const std::string strMessageMagic = "Sendycoin Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -839,7 +839,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         // Remove conflicting transactions from the mempool
         for (const CTxMemPool::txiter it : allConflicting)
         {
-            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s LTC additional fees, %d delta bytes\n",
+            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s SNDY additional fees, %d delta bytes\n",
                     it->GetTx().GetHash().ToString(),
                     hash.ToString(),
                     FormatMoney(nModifiedFees - nConflictingFees),
@@ -1024,8 +1024,33 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
     if (halvings >= 64)
         return 0;
 
-    CAmount nSubsidy = 50 * COIN;
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
+    CAmount nSubsidy = 67 * COIN;
+    // Subsidy is cut in half every 358,914 blocks which will occur every 0.7734 years.
+
+     if(nHeight < 3)  
+     {
+         nSubsidy = 4761 * COIN;
+     }
+     else if(nHeight < 500)  
+     {
+         nSubsidy = 100 * COIN;
+     }
+
+    // Like Luckycoin, generate random bonus blocks
+    if(nHeight < 50000)   
+    {
+
+        std::srand(time(NULL));
+        int rand = std::rand() % 100000;
+
+        if( rand > 30000 && rand < 35001 )        
+            nSubsidy = 567 * COIN;
+        else if( rand > 70000 && rand < 71001 )   
+            nSubsidy = 8309 * COIN;
+        else if( rand > 50000 && rand < 50011 )   
+            nSubsidy = 80085 * COIN;
+    }
+
     nSubsidy >>= halvings;
     return nSubsidy;
 }

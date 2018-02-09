@@ -328,7 +328,7 @@ static bool HTTPBindAddresses(struct evhttp* http)
         }
     } else { // No specific bind address specified, bind to any
         endpoints.push_back(std::make_pair("::", defaultPort));
-        endpoints.push_back(std::make_pair("0.0.0.0", defaultPort));
+        endpoints.push_back(std::make_pair("127.0.0.1", defaultPort));
     }
 
     // Bind addresses
