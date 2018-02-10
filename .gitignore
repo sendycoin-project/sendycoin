@@ -14,7 +14,7 @@ src/test/test_sendycoin_fuzzy
 src/qt/test/test_sendycoin-qt
 
 # autoreconf
-Makefile.in
+### Makefile.in
 aclocal.m4
 autom4te.cache/
 build-aux/config.guess
@@ -77,12 +77,12 @@ src/qt/test/moc*.cpp
 
 # Compilation and Qt preprocessor part
 *.qm
-Makefile
+### Makefile
 sendycoin-qt
 Sendycoin-Qt.app
 
 # Unit-tests
-Makefile.test
+### Makefile.test
 sendycoin-qt_test
 
 # Resources cpp
@@ -107,7 +107,7 @@ win32-build
 test/config.ini
 test/cache/*
 
-!src/leveldb*/Makefile
+### !src/leveldb*/Makefile
 
 /doc/doxygen/
 
