@@ -2,7 +2,8 @@
 
 *.pem
 Administrator*.*
-sendycoin\ specs.xlsx
+*ndycoin\ specs.xlsx
+*ndycoin\ notes.docx
 
 *.exe
 src/sendycoin
